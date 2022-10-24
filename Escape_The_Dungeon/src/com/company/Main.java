@@ -18,7 +18,7 @@ public class Main {
         gameWindow.pack();
         gameWindow.setVisible(true);
     //**************
-
+        gamePanel.startGameThread();
     //
     }
 }
