@@ -1,5 +1,8 @@
 package com.company;
 
+import levels.Map;
+import levels.Textures;
+
 import javax.swing.*;
 
 import java.awt.*;
@@ -8,9 +11,9 @@ import java.io.*;
 
 public class GamePanel extends JPanel implements Runnable{
     //Making a game screen with sections - 16x16pixels or 8x8 - to do
-    final int oneSection = 8; //8x8pix game
-    final int scale = 4;
-    final int screenSize= scale*oneSection;
+   public static final int oneSection = 8; //8x8pix game
+   public static final int scale = 4;
+   public static final int screenSize= scale*oneSection;
 
     final int screenRow=24;
     final int screenColumn=30;
@@ -19,6 +22,8 @@ public class GamePanel extends JPanel implements Runnable{
     //*** resolution 1024x768
 
     Controls keyControls = new Controls();
+
+    Map map = new Map();
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(windowHeight, widowLength));
@@ -101,9 +106,18 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;      //Extenciton of graphis specified for 2d
 
+        map.drawTextures(g2);
+
         g2.setColor(Color.red);
         g2.fillRect(playerPositionX, playerPositionY, screenSize, screenSize);      //main character position + size of main character
+
     }
+    //***********************************************
+
+  //  Textures mapTextures = new Textures(this);
+
+    //mapTextures.draw(g2);
+
 }
-//***********************************************
+
 
