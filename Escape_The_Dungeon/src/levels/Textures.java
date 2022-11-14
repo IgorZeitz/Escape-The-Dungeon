@@ -14,6 +14,23 @@ public class Textures {
     //this.texture()
 
    public BufferedImage image;
+
+  public boolean collision;
+
+   //Textures(){
+
+   //}
+
+//   public void colision(){
+
+
+//
+//      if(canColide=true){
+//
+//      } else{
+//
+//      }
+//   }
            //floor, wall, door;
 
 //    public void drawMap(Graphics2D gm) throws IOException {

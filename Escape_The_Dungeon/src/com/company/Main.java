@@ -1,5 +1,7 @@
 package com.company;
 
+import levels.Map;//////////////////////////////////// TU usunąć potem!!!
+
 import javax.swing.*;
 
 public class Main {
@@ -20,5 +22,8 @@ public class Main {
     //**************
         gamePanel.startGameThread();
     //
+
+     //   Map map = new Map();    //////////////////////////////// TU usunąć potem!!!
+     //   map.mapLoading();
     }
 }

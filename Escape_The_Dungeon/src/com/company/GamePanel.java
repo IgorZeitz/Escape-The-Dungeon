@@ -15,15 +15,15 @@ public class GamePanel extends JPanel implements Runnable{
    public static final int scale = 4;
    public static final int screenSize= scale*oneSection;
 
-    final int screenRow=24;
-    final int screenColumn=30;
+   public static final int screenRow=22;
+    public static final int screenColumn=30;
     final int windowHeight = screenColumn*screenSize; //(8*4)*30=1024
     final int widowLength = screenRow*screenSize; //(8*4)*24=768
     //*** resolution 1024x768
 
     Controls keyControls = new Controls();
 
-    Map map = new Map();
+    Map map = new Map();            // TU MAPA!
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(windowHeight, widowLength));
@@ -87,20 +87,13 @@ public class GamePanel extends JPanel implements Runnable{
     int playerPositionY = 100;
 //------------------------------------------------------
 
+    Player player1 = new Player(keyControls);
+
     public void updateGame() {
 
-        if(keyControls.up == true){
-            playerPositionY-=3; //moving up by 3pix
-        }
-        if(keyControls.down==true){
-            playerPositionY+=3;
-        }
-        if(keyControls.left==true){
-            playerPositionX-=3;
-        }
-        if(keyControls.right==true){
-            playerPositionX+=3;
-        }
+        player1.playerUpdate(); //updating player1 position
+
+
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -108,13 +101,17 @@ public class GamePanel extends JPanel implements Runnable{
 
         map.drawTextures(g2);
 
-        g2.setColor(Color.red);
-        g2.fillRect(playerPositionX, playerPositionY, screenSize, screenSize);      //main character position + size of main character
+        player1.drawPlayer(g2);
 
+       // g2.setColor(Color.red);
+        //g2.fillRect(playerPositionX, playerPositionY, screenSize, screenSize);      //main character position + size of main character
+
+
+       // map.mapLoading();
     }
     //***********************************************
 
-  //  Textures mapTextures = new Textures(this);
+    //Textures mapTextures = new Textures();
 
     //mapTextures.draw(g2);
 
