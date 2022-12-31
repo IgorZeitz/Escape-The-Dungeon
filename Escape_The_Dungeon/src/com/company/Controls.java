@@ -49,11 +49,25 @@ public class Controls implements KeyListener {
             right=false;
         }
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+                    //Pause menu - Lvl 1
             if(GamePanel.gameOn==0){
                 GamePanel.gameOn=2;
             } else if(GamePanel.gameOn==2){
                 GamePanel.gameOn=0;
             }
+                    //Pause menu - Lvl 2
+            else if(GamePanel.gameOn==8){
+                GamePanel.gameOn=2;
+            } else if(GamePanel.gameOn==2){
+                GamePanel.gameOn=8;
+            }
+                    //Pause menu - Lvl 3
+            else if(GamePanel.gameOn==9){
+                GamePanel.gameOn=2;
+            } else if(GamePanel.gameOn==2){
+                GamePanel.gameOn=9;
+            }
+
         }
     }
 }
