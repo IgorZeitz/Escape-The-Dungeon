@@ -6,6 +6,8 @@ import javax.swing.*;
 
 public class Main {
 
+   // static boolean closeWindow=false;
+
     public static void main(String[] args) {
 	//***Game window
         JFrame gameWindow = new JFrame();
@@ -17,10 +19,20 @@ public class Main {
         GamePanel gamePanel = new GamePanel();  //adding JPanel to JFrame
         gameWindow.add(gamePanel);
 
+      //  gameWindow.add(UI.p);
+
         gameWindow.pack();
-        gameWindow.setVisible(true);
+
+      //  While(closeWindow==true){
+      //      gameWindow.setVisible(false);
+      //  } else {
+            gameWindow.setVisible(true);
+      //  }
     //**************
         gamePanel.startGameThread();
+
+
+        //gameWindow.add(endingPanel);
     //
 
      //   Map map = new Map();    //////////////////////////////// TU usunąć potem!!!

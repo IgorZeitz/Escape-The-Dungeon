@@ -10,7 +10,6 @@ public class Controls implements KeyListener {
     public boolean left;
     public boolean right;
 
-
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -49,8 +48,12 @@ public class Controls implements KeyListener {
         if(e.getKeyCode() == KeyEvent.VK_D){
             right=false;
         }
-        if(e.getKeyCode() == KeyEvent.VK_SPACE){
-            //Additional functionality
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+            if(GamePanel.gameOn==0){
+                GamePanel.gameOn=2;
+            } else if(GamePanel.gameOn==2){
+                GamePanel.gameOn=0;
+            }
         }
     }
 }

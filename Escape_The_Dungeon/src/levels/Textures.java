@@ -17,6 +17,8 @@ public class Textures {
 
   public boolean collision;
 
+  public boolean endingTile;
+
    //Textures(){
 
    //}

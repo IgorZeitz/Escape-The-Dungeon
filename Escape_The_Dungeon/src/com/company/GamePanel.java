@@ -17,11 +17,19 @@ public class GamePanel extends JPanel implements Runnable{
 
    public static final int screenRow=22;
     public static final int screenColumn=30;
-    final int windowHeight = screenColumn*screenSize; //(8*4)*30=1024
-    final int widowLength = screenRow*screenSize; //(8*4)*24=768
+    static final int windowHeight = screenColumn*screenSize; //(8*4)*30=1024
+    static final int widowLength = screenRow*screenSize; //(8*4)*24=768
     //*** resolution 1024x768
 
     Controls keyControls = new Controls();
+
+    MouseControls mouseControls = new MouseControls();
+
+    UI ui = new UI(this);
+
+    static ObjectCollision collision = new ObjectCollision();
+
+    static ObjectCollision endingCollision = new ObjectCollision();
 
     Map map = new Map();            // TU MAPA!
 
@@ -31,16 +39,10 @@ public class GamePanel extends JPanel implements Runnable{
         this.setVisible(true);
         //implemented key "input"
         this.addKeyListener(keyControls);
+
+        this.addMouseListener(mouseControls);
+
         this.setFocusable(true);
-    }
-
-    //after pressing start game or the number of level turn to true
-    boolean gameRuns;
-    //methot to implement 60fps
-    void frameRate(double fps){
-        while(gameRuns=true){
-
-        }
     }
 
 
@@ -82,38 +84,69 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
-//Player positioning - moving (by changing x&y)
-    int playerPositionX = 100;
-    int playerPositionY = 100;
 //------------------------------------------------------
 
     Player player1 = new Player(keyControls);
+    Player distanceView = new Player(keyControls);
 
+    public static int gameOn=0;
     public void updateGame() {
 
-        player1.playerUpdate(); //updating player1 position
-
+            player1.playerUpdate(); //updating player1 position
+        distanceView.playerUpdate();
 
     }
+
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;      //Extenciton of graphis specified for 2d
 
-        map.drawTextures(g2);
-
-        player1.drawPlayer(g2);
-
-       // g2.setColor(Color.red);
-        //g2.fillRect(playerPositionX, playerPositionY, screenSize, screenSize);      //main character position + size of main character
 
 
-       // map.mapLoading();
+        if(gameOn == 0) {
+            //Lvl 1
+            player1.collision();
+            distanceView.collision();
+
+            map.drawTextures(g2);
+        } else if(gameOn==8){
+            //Lvl 2
+            map.mapLoading();
+            map.drawTextures(g2);
+
+            player1.collision();
+            distanceView.collision();
+
+             }else if(gameOn==9){
+            //Lvl 3
+            map.mapLoading();
+            map.drawTextures(g2);
+
+            player1.collision();
+            distanceView.collision();
+        }
+
+        player1.endingCollision();
+        distanceView.endingCollision();
+        if(gameOn == 0) {
+            player1.drawPlayer(g2);
+            distanceView.drawDistance(g2);
+            //gameOn - used 2x for drawing and moving -> to correct
+        } else if(gameOn==8){
+            //Lvl 2
+            player1.drawPlayer(g2);
+            distanceView.drawDistance(g2);
+
+        }else if(gameOn==9) {
+            //Lvl 3
+            player1.drawPlayer(g2);
+            distanceView.drawDistance(g2);
+        }
+
+        ui.draw(g2);
     }
-    //***********************************************
 
-    //Textures mapTextures = new Textures();
 
-    //mapTextures.draw(g2);
 
 }
 

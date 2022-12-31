@@ -8,7 +8,7 @@ import java.io.*;
 
 public class Map {
 
-    Textures[] tile;
+    public Textures[] tile;
 
     public Map(){
 
@@ -26,9 +26,11 @@ public class Map {
 
             tile[1] = new Textures();
             tile[1].image= ImageIO.read(getClass().getResourceAsStream("/textures/brickWall.png"));
+            tile[1].collision=true;
 
             tile[2] = new Textures();
             tile[2].image= ImageIO.read(getClass().getResourceAsStream("/textures/door.png"));
+            tile[2].endingTile = true;
 
            // tile[3] = new Textures();
            // tile[3].image= ImageIO.read(getClass().getResourceAsStream("/textures/domek.png"));
@@ -67,18 +69,24 @@ public class Map {
     } catch (Exception e) {
         e.printStackTrace();
     }
-//        g2.drawImage(tile[0].image,0, 0, GamePanel.screenSize, GamePanel.screenSize, null);
-//        g2.drawImage(tile[1].image,32, 0, GamePanel.screenSize, GamePanel.screenSize, null);
-//        g2.drawImage(tile[2].image,64, 0, GamePanel.screenSize, GamePanel.screenSize, null);
     }
 //---------------------Loading whole map form txt-------------
 
-    int[][] map = new int[GamePanel.screenRow][GamePanel.screenColumn];
-
-    public void mapLoading () {
+    public int[][] map = new int[GamePanel.screenRow][GamePanel.screenColumn];
+static String mapPathFile;
+    public void mapLoading() {
         try {
             //----Reading the file-----
-            File txtFile = new File("C:\\Users\\igorz\\OneDrive\\Dokumenty\\Java\\Escape_The_Dungeon\\src\\maps\\1.txt");   //Nie fajna ścierza - ale działą
+            // !!!!!!!!!!!!!!!!!!!!!! if(GamePanel.gameOn){few options}
+            if(GamePanel.gameOn==0) {
+                mapPathFile="src/maps/1.txt";
+            }else if(GamePanel.gameOn==8){
+                mapPathFile="src/maps/2.txt";
+            }else if(GamePanel.gameOn==9){
+                mapPathFile="src/maps/3.txt";
+            }
+                File txtFile = new File(mapPathFile); //XDDD   //Nie fajna ścierza - ale działą
+
 
            // FileInputStream fstream = new FileInputStream("/maps/lvl1.txt");    // Err. System nie może odnaleźć określonej ścieżki
             BufferedReader brLvlTxt = new BufferedReader(new FileReader(txtFile));
@@ -116,11 +124,6 @@ public class Map {
         }
 
         //----Importing string into a int array map
-        
-
-
-
-
 
 //        List<String> listMap = Collections.emptyList();
 //
@@ -135,6 +138,3 @@ public class Map {
      }
 
 }
-/*
-Tablica wypełnia się CAłA tą samą linią i po wypełnieniu całości! przechodzi dopiero do następnej lini!!!!
- */
