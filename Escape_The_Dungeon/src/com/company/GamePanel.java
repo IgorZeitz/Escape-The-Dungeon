@@ -114,6 +114,9 @@ public class GamePanel extends JPanel implements Runnable{
             map.mapLoading();
             map.drawTextures(g2);
 
+            collision.checkCollision(player1);
+
+            ObjectCollision.map.mapLoading();
             player1.collision();
             distanceView.collision();
 
@@ -121,6 +124,9 @@ public class GamePanel extends JPanel implements Runnable{
             //Lvl 3
             map.mapLoading();
             map.drawTextures(g2);
+
+            ObjectCollision.map.mapLoading();
+            collision.checkCollision(player1);
 
             player1.collision();
             distanceView.collision();

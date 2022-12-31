@@ -10,13 +10,13 @@ public class ObjectCollision {
 
     Controls controls = new Controls();
     Player player = new Player(controls);
-    Map map = new Map();
+    static Map map = new Map();
 
     public void checkCollision(Player player){
 
         int upCollision = player.playerPositionY + 2 + GamePanel.screenSize-16; //+0 = + collision area position
-        int downCollision = player.playerPositionY + 32 ; //+0 +0 = -||- + player collision width
-        int leftCollision = player.playerPositionX +12;
+        int downCollision = player.playerPositionY + 32; //+0 +0 = -||- + player collision width
+        int leftCollision = player.playerPositionX + 12;
         int rightCollision = player.playerPositionX + 2 + GamePanel.screenSize-16;
 
         int leftColumn = leftCollision/GamePanel.screenSize;
