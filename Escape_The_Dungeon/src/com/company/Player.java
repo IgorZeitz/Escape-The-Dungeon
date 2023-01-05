@@ -48,7 +48,7 @@ public class Player {
                 return 2;
             }
             if (playerControls.left == true) {
-               // playerPositionX -= playerSpeed; // do poprawienia - za szybko
+               // playerPositionX -= playerSpeed;
                 return 3;
             }
             if (playerControls.right == true) {

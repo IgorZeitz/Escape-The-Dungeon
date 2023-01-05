@@ -20,7 +20,7 @@ public class ObjectCollision {
         int rightCollision = player.playerPositionX + 2 + GamePanel.screenSize-16;
 
         int leftColumn = leftCollision/GamePanel.screenSize;
-        int rightColumn = rightCollision/GamePanel.screenSize;          //TU GDZIES WARTOSCI POMIESZANE - JUZ GIT
+        int rightColumn = rightCollision/GamePanel.screenSize;
         int upRow = upCollision/GamePanel.screenSize;
         int downRow = downCollision/GamePanel.screenSize;
 
@@ -72,8 +72,6 @@ public class ObjectCollision {
         int endingBlock;
 
                 endingBlock = map.map[Row][Column];
-
-     //   System.out.println(player.playerPositionX + "____" + player.playerPositionY + "    " + endingBlock);// TO SIĘ WYKONUJE !!!
 
         if(map.tile[endingBlock].endingTile==true){
                     player.playerEndingCollision=true;

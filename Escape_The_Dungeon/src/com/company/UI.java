@@ -9,9 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import javax.swing.*;
 
 public class UI {
 
@@ -44,21 +41,22 @@ public class UI {
         }
     }
 
-   // Player player = new Player(GamePanel.keyControls);
-  // JPanel p = new JPanel();  //adding JPanel to JFrame
-   static JPanel pO = new JPanel();
-    public static int i=0; //due to this + if = only 1 implementation
+  static JFrame f = new JFrame("Menu");
+
+    static JPanel pO = new JPanel();
+    public static int i=0; // due to this + if => only 1 implementation
     public static void menu(){
-        for( ; i<1; i++) {  //not a good way to do it but -_-  -------------- Creating JPanel outside the menu() will fix it probably
-            JFrame f = new JFrame("Menu");
+        for( ; i<1; i++) {  // + i=0 while changing level => I quess it's not a good way to do it -_-
             f.setResizable(false);
             f.setLocationRelativeTo(null);
             f.setSize(GamePanel.windowHeight, GamePanel.widowLength);
+            //f.setLayout(new GridBagLayout());
 
 
 
             p.setPreferredSize(new Dimension(GamePanel.windowHeight, GamePanel.widowLength));
             p.setBackground(Color.darkGray);
+            p.setLayout(new GridBagLayout());
 
             JButton b1 = new JButton("Options");
             JButton b2 = new JButton("Level");
@@ -70,10 +68,14 @@ public class UI {
 
             JCheckBox ch =new JCheckBox("MUSIC:");
 
-            ch.addActionListener(new ActionListener() {
+            ch.addItemListener(new ItemListener() {
                 @Override
-                public void actionPerformed(ActionEvent e) {
-                    startMusic(musicFilePath);
+                public void itemStateChanged(ItemEvent e) {
+                    if(e.getStateChange()==1){
+                        startMusic(musicFilePath);
+                    }else{
+                        clip.stop();
+                    }
                 }
             });
 
@@ -107,11 +109,14 @@ public class UI {
                     f.add(pO);
                 }
             });
+            pO.setLayout(new GridBagLayout());
+
 
             JPanel lvlP = new JPanel();
 
             lvlP.setPreferredSize(new Dimension(GamePanel.windowHeight, GamePanel.widowLength));
-            lvlP.setBackground(Color.green);
+            lvlP.setBackground(Color.gray);
+            lvlP.setLayout(new GridBagLayout());
 
             JButton lvl1 = new JButton("Level 1");
             JButton lvl2 = new JButton("Level 2");
@@ -156,6 +161,7 @@ public class UI {
 
                     GamePanel.gameOn=8;
 
+                    i=0;
                 }
             });
 
@@ -168,6 +174,7 @@ public class UI {
 
                     GamePanel.gameOn=9;
 
+                    i=0;
                 }
             });
 //                      ---------------------------
@@ -191,6 +198,8 @@ public class UI {
         }
 
     }
+
+//          --- PAUSE MENU
 
     public void pauseMenu(){
         String text1 = "Game Paused";
@@ -226,6 +235,8 @@ public class UI {
 
     }
 
+//          ---ENDING MENU---
+
     public static void endingMenu(){
 
         String text = "YOU FOUND THE EXIT";
@@ -248,13 +259,16 @@ public class UI {
 //          ---MUSIC---
 
     static String musicFilePath="src/sounds/8_Bit_Adventure.wav";
+    public static Clip clip;
     public static void startMusic(String musicFilePatch){
         try{
             File music = new File(musicFilePatch);
             AudioInputStream audio = AudioSystem.getAudioInputStream(music);
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(audio);
             clip.start();
+
+            clip.loop(Clip.LOOP_CONTINUOUSLY); // music --> infinity
         } catch (Exception exception){
             exception.printStackTrace();
         }

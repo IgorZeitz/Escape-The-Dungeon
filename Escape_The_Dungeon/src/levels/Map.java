@@ -14,11 +14,10 @@ public class Map {
 
         tile = new Textures[4];
 
-
         loadTextures();
         mapLoading();
     }
-//---------------Loading textures to array-------------------------------------
+//---------------Loading textures to the array-------------------------------------
     public void loadTextures(){
         try {
             tile[0] = new Textures();
@@ -47,7 +46,7 @@ public class Map {
         int worldRows = GamePanel.screenRow; // to set
 
         int x = 0;
-        int y = 0;//position of tales
+        int y = 0; //position of tales
 
         int colX;
         int colY;
@@ -60,7 +59,7 @@ public class Map {
             g2.drawImage(tile[numberToWrite].image, x, y, GamePanel.screenSize, GamePanel.screenSize, null);
             x = x + GamePanel.screenSize;
             if (colX == worldColumns -1) {
-                colX = -1;               //TU CHYBA -1? ALE -1=invalid array index - pytanie czy przez to źle rysuje - bo po wyjściu z pętli => wejścu w pętle rysowania od razu colX=0 więc poprawny index tabeli
+                colX = -1;
                 x = 0;
                 y = y + GamePanel.screenSize;
                 colY++;
@@ -77,7 +76,6 @@ static String mapPathFile;
     public void mapLoading() {
         try {
             //----Reading the file-----
-            // !!!!!!!!!!!!!!!!!!!!!! if(GamePanel.gameOn){few options}
             if(GamePanel.gameOn==0) {
                 mapPathFile="src/maps/1.txt";
             }else if(GamePanel.gameOn==8){
@@ -85,10 +83,8 @@ static String mapPathFile;
             }else if(GamePanel.gameOn==9){
                 mapPathFile="src/maps/3.txt";
             }
-                File txtFile = new File(mapPathFile); //XDDD   //Nie fajna ścierza - ale działą
+                File txtFile = new File(mapPathFile);
 
-
-           // FileInputStream fstream = new FileInputStream("/maps/lvl1.txt");    // Err. System nie może odnaleźć określonej ścieżki
             BufferedReader brLvlTxt = new BufferedReader(new FileReader(txtFile));
 
             String sLine;
@@ -98,42 +94,29 @@ static String mapPathFile;
 
             while ((sLine = brLvlTxt.readLine()) != null) {
 
-            for(int colX = 0, colY=0; colX < worldColumns && colY < worldRows; colX++){                // odwoływanie się do 31 elementu tablicy przez <= ???
+            for(int colX = 0, colY=0; colX < worldColumns && colY < worldRows; colX++){ // if <= 31 it is trying to "find" 31 element
 
                     String[] mapNumbers =  sLine.split(" ");
                     int number = Integer.parseInt(mapNumbers[colX]);
 
                     map[colY][colX]=number;
-                  //  colX++; przeskakiwanie co 2?
 
 
-                if(colX==worldColumns-1) {        // TU PRZERZUCILEM
+                if(colX==worldColumns-1) {
 
-                    colX=-1 ;                //TU CHYBA -!
-                    sLine= brLvlTxt.readLine(); //Tu Brakowało !!!!
+                    colX=-1 ;
+                    sLine= brLvlTxt.readLine();
                     colY++;
 
                 }
             }
             }
 
-            brLvlTxt.close();           //22,55? w złym miejscu przerwanie czytania, stąd zczytuję w pętli tylko pierwszą linie
+            brLvlTxt.close();
 
         }catch (Exception e){
             e.printStackTrace();
         }
-
-        //----Importing string into a int array map
-
-//        List<String> listMap = Collections.emptyList();
-//
-////        try {
-////            listMap = Files.readAllLines(Paths.get("/maps/lvl1.txt"));
-////        } catch (IOException e){
-////            e.printStackTrace();
-////        }
-////
-////        // NOT WORKING -paths.get- idk why^ System.out.println(listMap);
 
      }
 

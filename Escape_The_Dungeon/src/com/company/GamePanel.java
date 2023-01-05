@@ -1,13 +1,11 @@
 package com.company;
 
 import levels.Map;
-import levels.Textures;
 
 import javax.swing.*;
 
 import java.awt.*;
 
-import java.io.*;
 
 public class GamePanel extends JPanel implements Runnable{
     //Making a game screen with sections - 16x16pixels or 8x8 - to do
@@ -31,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     static ObjectCollision endingCollision = new ObjectCollision();
 
-    Map map = new Map();            // TU MAPA!
+    Map map = new Map();  // TU MAPA
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(windowHeight, widowLength));
@@ -99,7 +97,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;      //Extenciton of graphis specified for 2d
+        Graphics2D g2 = (Graphics2D)g;
 
 
 
