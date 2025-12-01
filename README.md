@@ -11,9 +11,9 @@ Escape The Dungeon is a 2D pixel-art educational game where the player must navi
 The protagonist can be controlled using the arrows keys or wasd, allowing movement in four directions - up, left, down and right. Each level is a static design to encourage the player to observe, plan, and memorize paths rather than relying on random generation.
 [Escape-The-Dungeon preview video][ETD_YT]
 
-<h1 align="center"> 
+<div align="center"> 
 <img src="https://github.com/IgorZeitz/Escape-The-Dungeon/blob/main/Escape_The_Dungeon/src/textures/Escape-The-Dungeon_Teaser%20bez%20znaku%20wodnego.gif">
-</h1>
+</div>
 
 ### Features
 - 🤔 Educational game  
